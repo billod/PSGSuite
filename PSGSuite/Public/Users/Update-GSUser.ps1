@@ -55,7 +55,11 @@ function Update-GSUser {
     If true, the user's IP address is white listed: http://support.google.com/a/bin/answer.py?answer=60752
     
     .PARAMETER CustomSchemas
-    Custom user attribute values to add to the user's account. This parameter only accepts a hashtable where the keys are Schema Names and the value for each key is another hashtable, i.e.: 
+    Custom user attribute values to add to the user's account. 
+    
+    The Custom Schema and it's fields **MUST** exist prior to updating these values for a user otherwise it will return an error.
+    
+    This parameter only accepts a hashtable where the keys are Schema Names and the value for each key is another hashtable, i.e.: 
 
         Update-GSUser -User john.smith@domain.com -CustomSchemas @{
             schemaName1 = @{
@@ -78,8 +82,6 @@ function Update-GSUser {
                 fieldName3 = $null
             }
         }
-
-    The Custom Schema and it's fields **MUST** exist prior to updating these values for a user otherwise it will return an error.
     
     .EXAMPLE
     Update-GSUser -User john.smith@domain.com -PrimaryEmail johnathan.smith@domain.com -GivenName Johnathan -Suspended:$false
